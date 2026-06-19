@@ -214,7 +214,6 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       <main className="flex flex-1">
         <div className="bg-slate-700 p-4 w-3/4 space-y-6">
           {/* SECTION 1 - Masukkan Data Akun */}
-         
 
           {/* SECTION 2 - Pilih Nominal */}
           <div>
@@ -250,7 +249,6 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
           </div>
 
 
-         
 
           {/* SECTION 5 - Detail Kontak */}
           <div className="bg-gray-700 p-4 rounded-lg shadow">
@@ -334,7 +332,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
 
   </div>
 
-  
+
 
  {/* MODAL */}
       {showModal && (
@@ -412,7 +410,6 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
 >
   {loading ? "Memproses..." : "Pesan Sekarang"}
 </button>
-  
 
     {showSnap && (
         <SnapCheckout
@@ -438,12 +435,10 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
 
       </div>
 
-      
-     
 
 
       </main>
-      
+
     </div>
 
     <Footer/>

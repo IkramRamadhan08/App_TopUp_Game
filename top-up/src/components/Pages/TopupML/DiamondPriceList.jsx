@@ -50,12 +50,10 @@ const DiamonPriceList = () => {
   const [snapToken, setSnapToken] = useState(null);
   const [invoiceNumber, setInvoiceNumber] = useState(null);
   const [showSnap, setShowSnap] = useState(false);
-  
 
   const navigate = useNavigate();
- 
 
- 
+
 
   const tambahJumlah = () => {
     const newJumlah = jumlah + 1;
@@ -77,10 +75,9 @@ const DiamonPriceList = () => {
     }
   };
 
-  
 
-  
-  
+
+
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -111,12 +108,11 @@ const DiamonPriceList = () => {
 
 
   const handlePesanSekarang = async () => {
-    
 
   const selectedProduct = products[selectedDiamond];
 
   const payload = {
-  produk_id: selectedProductId, 
+  produk_id: selectedProductId,
   produk_type: selectedProduct.type,
   game_id: id,
   server: server,
@@ -167,8 +163,6 @@ console.log("Payload yang dikirim:", payload);
 };
 
 
-
- 
 
     const { invoice, loading, submitTransaksi } = useTransaksi();
 
@@ -242,7 +236,6 @@ console.log("Payload yang dikirim:", payload);
       <main className="flex flex-1">
         <div className="bg-slate-700 p-4 w-3/4 space-y-6">
           {/* SECTION 1 - Masukkan Data Akun */}
-         
 
           {/* SECTION 2 - Pilih Nominal */}
           <div>
@@ -278,7 +271,6 @@ console.log("Payload yang dikirim:", payload);
           </div>
 
 
-         
 
           {/* SECTION 5 - Detail Kontak */}
           <div className="bg-gray-700 p-4 rounded-lg shadow">
@@ -362,7 +354,7 @@ console.log("Payload yang dikirim:", payload);
 
   </div>
 
-  
+
 
  {/* MODAL */}
       {showModal && (
@@ -440,7 +432,6 @@ console.log("Payload yang dikirim:", payload);
 >
   {loading ? "Memproses..." : "Pesan Sekarang"}
 </button>
-  
 
     {showSnap && (
         <SnapCheckout
@@ -466,8 +457,7 @@ console.log("Payload yang dikirim:", payload);
 
       </div>
 
-      
-     
+
 
 
       </main>
@@ -492,10 +482,10 @@ console.log("Payload yang dikirim:", payload);
       <h3 className="font-semibold text-lg mb-2">Kamu Punya Pertanyaan?</h3>
       <div className="space-y-2">
         <button className="w-full bg-gray-800 p-3 rounded-lg text-left hover:bg-gray-700 transition">
-          Bagaimana cara top up di Hadi Store?
+          Bagaimana cara top up di Kelompok Store?
         </button>
         <button className="w-full bg-gray-800 p-3 rounded-lg text-left hover:bg-gray-700 transition">
-          Metode pembayaran apa saja yang ada di Hadi Store?
+          Metode pembayaran apa saja yang ada di Kelompok Store?
         </button>
       </div>
     </div>
@@ -503,13 +493,13 @@ console.log("Payload yang dikirim:", payload);
     <div>
       <h3 className="font-semibold text-lg mb-2">Hubungi Kami</h3>
       <p className="text-sm">WhatsApp: +62 812-xxxx-xxxx</p>
-      <p className="text-sm">Email: support@ourastore.com</p>
+      <p className="text-sm">Email: support@kelompokstore.com</p>
       <p className="text-sm">Alamat: Jl. Game Center No. 99, Jakarta</p>
     </div>
   </div>
 
   <div className="bg-gray-800 text-center py-3 mt-4">
-    <p className="text-sm">&copy; 2025 Hadi Store. All rights reserved.</p>
+    <p className="text-sm">&copy; 2025 Kelompok Store. All rights reserved.</p>
   </div>
 </footer>
 
