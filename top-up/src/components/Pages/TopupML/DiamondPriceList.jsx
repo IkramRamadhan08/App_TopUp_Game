@@ -28,7 +28,7 @@ const SnapCheckout = ({ invoiceNumber, snapToken, onStatusCheck }) => {
 
 
 
-const DiamonPriceList = () => {
+const DiamondPriceList = () => {
   const [jumlah, setJumlah] = useState(1);
   const [hargaPerDiamond, setHargaPerDiamond] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -508,4 +508,4 @@ console.log("Payload yang dikirim:", payload);
   );
 };
 
-export default DiamonPriceList;
+export default DiamondPriceList;
