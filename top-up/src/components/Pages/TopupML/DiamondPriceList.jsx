@@ -412,7 +412,7 @@ console.log("Payload yang dikirim:", payload);
       <input type="checkbox" className="mr-2 mt-1 accent-blue-500" />
       <label>
         Dengan klik <span className="text-white font-medium">Pesan Sekarang</span>, kamu menyetujui{' '}
-        <span className="text-blue-400 underline">Syarat & Ketentuan</span>.
+        <span className="text-blue-400 underline">Ketentuan Layanan</span>.
       </label>
     </div>
 
@@ -471,7 +471,7 @@ console.log("Payload yang dikirim:", payload);
     <br />4) Pilih Pembayaran
     <br />5) Tulis Kode Promo (jika ada)
     <br />6) Masukkan No WhatsApp
-    <br />7) Klik Order Now & lakukan Pembayaran
+    <br />7) Klik Pesan Sekarang & lakukan Pembayaran
     <br />8) Produk otomatis masuk ke akun game anda
   </p>
 </div>

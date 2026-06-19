@@ -390,7 +390,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       <input type="checkbox" className="mr-2 mt-1 accent-blue-500" />
       <label>
         Dengan klik <span className="text-white font-medium">Pesan Sekarang</span>, kamu menyetujui{' '}
-        <span className="text-blue-400 underline">Syarat & Ketentuan</span>.
+        <span className="text-blue-400 underline">Ketentuan Layanan</span>.
       </label>
     </div>
 
