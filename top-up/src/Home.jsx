@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import CategoryList from './components/List/CategoryList';
 
@@ -7,11 +7,11 @@ import Banner from './components/Pages/Banner';
 
 
 const PublicLayout = () => {
-  
+  const [search, setSearch] = useState('');
 
   return (
     <div className="bg-slate-950 min-h-screen">
-      <Header />
+      <Header search={search} onSearch={setSearch} />
       
       
       <main className="container-fluid mx-auto px-4 py-20">
@@ -21,7 +21,7 @@ const PublicLayout = () => {
       >
         Top Up Murah & Cepat</Banner>
         </div>
-      <CategoryList  />
+      <CategoryList search={search} />
       
         
     

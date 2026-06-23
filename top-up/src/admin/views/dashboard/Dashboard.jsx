@@ -1,7 +1,6 @@
 import React from 'react';
 import DashboardStats from './Stats';
 import { BarChart3 } from 'lucide-react';
-import TotalPendapatanCard from './TotalPendapatancard';
 
 const Dashboard = () => {
   return (

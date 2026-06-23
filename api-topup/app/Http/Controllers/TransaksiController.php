@@ -111,7 +111,7 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::create([
             'produk_id' => $request->produk_id,
             'produk_type' => $request->produk_type,
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id(), // nullable — fine for guest checkout
             'nama' => $request->nama,
             'game_id' => $request->game_id,
             'server' => $request->input('server'),
@@ -131,16 +131,22 @@ class TransaksiController extends Controller
                 'gross_amount' => $request->total_harga,
             ],
             'customer_details' => [
-                'first_name' => $request->game_id,
+                'first_name' => $request->nama,
                 'phone' => $request->nohp,
             ],
             'callbacks' => [
-                'finish' => url('/invoice?order_id=' . $invoiceNumber), // ✅ Redirect ke invoice
+                'finish' => 'http://localhost:5173/invoice?order_id=' . $invoiceNumber,
             ]
         ];
 
-        // Request Snap token
-        $snapToken = Snap::getSnapToken($params);
+        try {
+            $snapToken = Snap::getSnapToken($params);
+        } catch (\Exception $e) {
+            $transaksi->delete();
+            return response()->json([
+                'message' => 'Gagal terhubung ke Midtrans: ' . $e->getMessage(),
+            ], 500);
+        }
 
         $transaksi->snap_token = $snapToken;
         $transaksi->save();

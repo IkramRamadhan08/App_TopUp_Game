@@ -80,37 +80,33 @@ class ProductSeeder extends Seeder
             ["name" => "875 (774+101) Diamonds", "price" => 225922, "type" => "mobilelegend", "category" => "diamond"],
 
             // Honor Of King
-            
-                ["name" => "30 Tokens", "price" => 8000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "60 Tokens", "price" => 15000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "120 Tokens", "price" => 30000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "180 Tokens", "price" => 44000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "300 Tokens", "price" => 73000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "450 Tokens", "price" => 109000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "600 Tokens", "price" => 145000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "930 Tokens", "price" => 215000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "1980 Tokens", "price" => 435000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "3280 Tokens", "price" => 715000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "6480 Tokens", "price" => 1350000, "type" => "honorofkings", "category" => "token"],
-                ["name" => "Monthly Pass", "price" => 59000, "type" => "honorofkings", "category" => "subscription"],
-                ["name" => "Weekly Pass", "price" => 19000, "type" => "honorofkings", "category" => "subscription"],
-            
+            ["name" => "30 Tokens", "price" => 8000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "60 Tokens", "price" => 15000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "120 Tokens", "price" => 30000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "180 Tokens", "price" => 44000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "300 Tokens", "price" => 73000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "450 Tokens", "price" => 109000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "600 Tokens", "price" => 145000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "930 Tokens", "price" => 215000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "1980 Tokens", "price" => 435000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "3280 Tokens", "price" => 715000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "6480 Tokens", "price" => 1350000, "type" => "honorofkings", "category" => "token"],
+            ["name" => "Monthly Pass", "price" => 59000, "type" => "honorofkings", "category" => "subscription"],
+            ["name" => "Weekly Pass", "price" => 19000, "type" => "honorofkings", "category" => "subscription"],
 
-
-            // Pulsa
-            ["name" => "Pulsa Telkomsel", "price" => 6500, "type" => "telkomsel", "category" => "pulsa"],
-            ["name" => "Pulsa XL 50K", "price" => 60000, "type" => "XL", "category" => "pulsa"],
-            ["name" => "Pulsa indosat 60K", "price" => 80000, "type" => "indosat", "category" => "pulsa"],
-            ["name" => "Pulsa Smartfren 80K", "price" => 85500, "type" => "smartfren", "category" => "pulsa"],
-
-            // Kuota
-            ["name" => "Kuota Telkomsel 1GB", "price" => 9500, "type" => "Telkomsel",  "category" => "kuota"],
-            ["name" => "Kuota XL 2GB", "price" => 15500, "type" => "XL", "category" => "kuota"],
-            ["name" => "Kuota Indosat 5GB", "price" => 20000, "type" => "indosat", "category" => "kuota"],
-            ["name" => "Kuota Smartfren 2GB", "price" => 15500, "type" => "smartfren", "category" => "kuota"],
+            // PUBG Mobile
+            ["name" => "60 UC", "price" => 15000, "type" => "pubg", "category" => "uc"],
+            ["name" => "180 UC", "price" => 43000, "type" => "pubg", "category" => "uc"],
+            ["name" => "300 UC", "price" => 71000, "type" => "pubg", "category" => "uc"],
+            ["name" => "600 UC", "price" => 140000, "type" => "pubg", "category" => "uc"],
+            ["name" => "900 UC", "price" => 209000, "type" => "pubg", "category" => "uc"],
+            ["name" => "1500 UC", "price" => 345000, "type" => "pubg", "category" => "uc"],
+            ["name" => "3000 UC", "price" => 685000, "type" => "pubg", "category" => "uc"],
+            ["name" => "6000 UC", "price" => 1350000, "type" => "pubg", "category" => "uc"],
+            ["name" => "Royal Pass", "price" => 149000, "type" => "pubg", "category" => "pass"],
         ];
 
-       foreach ($products as $index => $product) {
+        foreach ($products as $index => $product) {
             try {
                 $result = Product::updateOrCreate(
                     ['name' => $product['name'], 'type' => $product['type']],

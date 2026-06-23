@@ -17,36 +17,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('/admin/google-login', [UserController::class, 'googleLogin']);
 Route::get('/products', [ProductController::class, 'Product']);
-Route::get('/admin', [ProductController::class, 'Product']);
-Route::get('/stats', function () {
-    $totalRevenue = \App\Models\Transaksi::where('status_pembayaran', 'PAID')
-        ->where('status_transaksi', 'SUCCESS')
-        ->sum('total_harga');
-
-    return response()->json([
-        'users' => \App\Models\User::count(),
-        'transactions' => \App\Models\Transaksi::count(),
-        'products' => \App\Models\Product::count(),
-        'revenue' => $totalRevenue,
-    ]);
-});
-
-// routes/api.php
-Route::post('/transaksi', [TransaksiController::class, 'store']);
-Route::get('/transaksi', [TransaksiController::class, 'index']);
-Route::put('/transaksi/{id}', [TransaksiController::class, 'update']);
-Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy']);
 Route::get('/cek-status/{invoiceNumber}', [TransaksiController::class, 'cekStatus']);
-Route::get('/total-pendapatan', [TransaksiController::class, 'totalPendapatan']);
-Route::get('/transaksi/users', function () {
-    return \App\Models\Transaksi::select('nama', 'game_id', 'server', 'nohp')->get();
+
+// Public: buat transaksi & cek status (tanpa auth)
+Route::post('/transaksi', [TransaksiController::class, 'store']);
+
+// Protected: admin-only routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/admin', [ProductController::class, 'Product']);
+    Route::get('/stats', function () {
+        $totalRevenue = \App\Models\Transaksi::where('status_pembayaran', 'PAID')
+            ->where('status_transaksi', 'SUCCESS')
+            ->sum('total_harga');
+
+        return response()->json([
+            'users' => \App\Models\User::count(),
+            'transactions' => \App\Models\Transaksi::count(),
+            'products' => \App\Models\Product::count(),
+            'revenue' => $totalRevenue,
+        ]);
+    });
+
+    Route::get('/transaksi', [TransaksiController::class, 'index']);
+    Route::put('/transaksi/{id}', [TransaksiController::class, 'update']);
+    Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy']);
+    Route::get('/total-pendapatan', [TransaksiController::class, 'totalPendapatan']);
+    Route::get('/transaksi/users', function () {
+        return \App\Models\Transaksi::select('nama', 'game_id', 'server', 'nohp')->get();
+    });
 });
 
 

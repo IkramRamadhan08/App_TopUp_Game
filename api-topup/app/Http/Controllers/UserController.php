@@ -46,10 +46,9 @@ class UserController extends Controller
         return response()->json(['message' => 'Email atau password salah'], 401);
     }
 
-    // Optional: jika hanya admin yang boleh login
-    // if ($user->role !== 'admin') {
-    //     return response()->json(['message' => 'Unauthorized'], 403);
-    // }
+    if ($user->role !== 'admin') {
+        return response()->json(['message' => 'Unauthorized: hanya admin yang bisa login'], 403);
+    }
 
     $token = $user->createToken('admin-token')->plainTextToken;
 
@@ -68,17 +67,17 @@ function googleLogin(Request $request)
     if ($payload) {
         $user = User::firstOrCreate(
             ['email' => $payload['email']],
-            ['name' => $payload['name'], 'password' => Hash::make(Str::random(16))]
+            ['name' => $payload['name'], 'password' => Hash::make(Str::random(16)), 'role' => 'admin']
         );
+
+        $user->update(['name' => $payload['name']]);
 
         $token = $user->createToken('google_token')->plainTextToken;
 
-        return response()->json(['token' => $token]);
+        return response()->json(['token' => $token, 'user' => $user]);
     }
 
     return response()->json(['error' => 'Invalid Google token'], 401);
-
-    return redirect("http://localhost:5173/admin?token={$token}");
 }
 }
     

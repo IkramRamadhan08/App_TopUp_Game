@@ -45,7 +45,7 @@ const AppSidebar = () => {
 
       <CSidebarHeader className="border-bottom">
         <CSidebarBrand to="/">
-          <h1 className='text-white text-4xl  font-thin'>Hadi store</h1>
+          <h1 className='text-white text-4xl  font-thin'>AKS Store</h1>
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"

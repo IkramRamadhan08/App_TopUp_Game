@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./admin/ProtectedRoute";
 
 // Pages
 import Home from './Home';
@@ -8,6 +9,7 @@ import Register from './admin/views/pages/register/Register';
 import DefaultLayout from "./admin/layout/DefaultLayout";
 import DiamonEpep from "./components/Pages/TopupEpep/DiamonEpep";
 import DiamonHok from "./components/Pages/TopupHok/DiamonHok";
+import DiamondPubg from "./components/Pages/TopupPubg/DiamondPubg";
 
 // Admin pages
 import Dashboard from "./admin/views/dashboard/Dashboard";
@@ -17,8 +19,6 @@ import TransaksiPage from "./admin/views/referensi/Transaksi";
 import ProductTable from "./admin/views/referensi/Products";
 import User from "./admin/views/referensi/User";
 
-
-
 export default function App() {
   return (
     <Routes>
@@ -26,22 +26,22 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/DiamondMl" element={<DiamondMl />} />
       <Route path="/DiamondEpep" element={<DiamonEpep />} />
-      <Route path="/DiamonHok" element={< DiamonHok/>} />
+      <Route path="/DiamonHok" element={<DiamonHok />} />
+      <Route path="/DiamondPubg" element={<DiamondPubg />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/invoice" element={<Invoice />} />
 
-      {/* Admin Routes with layout */}
-      <Route path="*" element={<DefaultLayout />}>
-      <Route path="dashboard" element={<Dashboard />} />
-      <Route path="referensi/tabel" element={<RefensiTables />} />
-       <Route path="referensi/Transaksi" element={<TransaksiPage />} />
-       <Route path="referensi/Product" element={<ProductTable />} />
-       <Route path="referensi/User" element={< User/>} />
-    </Route>
-
-      {/* Fallback 404 */}
-      {/* <Route path="*" element={<h1>404 - Page Not Found</h1>} /> */}
+      {/* Protected Admin Routes */}
+      <Route path="/dashboard" element={<ProtectedRoute><DefaultLayout /></ProtectedRoute>}>
+        <Route index element={<Dashboard />} />
+      </Route>
+      <Route path="/referensi" element={<ProtectedRoute><DefaultLayout /></ProtectedRoute>}>
+        <Route path="tabel" element={<RefensiTables />} />
+        <Route path="Transaksi" element={<TransaksiPage />} />
+        <Route path="Product" element={<ProductTable />} />
+        <Route path="User" element={<User />} />
+      </Route>
     </Routes>
   );
 }

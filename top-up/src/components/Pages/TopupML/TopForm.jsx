@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTransaksi } from "../KonfirmasiPesanan/Transaksi";
 import Footer from "../../Footer"
 
@@ -27,7 +27,16 @@ const SnapCheckout = ({ invoiceNumber, snapToken, onStatusCheck }) => {
   );
 };
 
+const gameLabels = {
+  mobilelegend:  { currency: "Diamond", currencyLabel: "Diamond Total", unit: "Diamond" },
+  freefire:      { currency: "Diamond", currencyLabel: "Diamond Total", unit: "Diamond" },
+  epep:          { currency: "Diamond", currencyLabel: "Diamond Total", unit: "Diamond" },
+  honorofkings:  { currency: "Token",   currencyLabel: "Token Total",   unit: "Token" },
+  pubg:          { currency: "UC",      currencyLabel: "UC Total",      unit: "UC" },
+};
+
 const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.webp" }) => {
+  const labels = gameLabels[gameType] || gameLabels.mobilelegend;
   const [jumlah, setJumlah] = useState(1);
   const [hargaPerDiamond, setHargaPerDiamond] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -96,6 +105,21 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
   const handlePesanSekarang = async () => {
     const selectedProduct = products[selectedDiamond];
 
+    if (!nama.trim() || !id.trim() || !server.trim() || !nohp.trim()) {
+      alert("Harap isi semua field: Nama, ID, Server, dan No. HP");
+      return;
+    }
+
+    if (!selectedProductId) {
+      alert("Harap pilih nominal diamond terlebih dahulu");
+      return;
+    }
+
+    if (!metodePembayaran) {
+      alert("Harap pilih metode pembayaran");
+      return;
+    }
+
     const payload = {
       produk_id: selectedProductId,
       produk_type: selectedProduct.type,
@@ -136,6 +160,8 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       console.error("Gagal buat transaksi", err);
       if (err.response?.status === 422) {
         alert("Input tidak valid: " + JSON.stringify(err.response.data.errors));
+      } else if (err.response?.data?.message) {
+        alert(err.response.data.message);
       } else {
         alert("Gagal memproses transaksi.");
       }
@@ -154,17 +180,18 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
             type="text"
             placeholder="Cari Game atau Voucher"
             className="bg-gray-800 text-white p-2 rounded w-80"
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate('/'); }}
           />
         </div>
       </header>
 
       <nav className="bg-gray-800 p-2 flex space-x-4">
-        <a href="#" className="text-yellow-400">Topup</a>
-        <a href="#" className="text-white">Cek Transaksi</a>
-        <a href="#" className="text-white">Leaderboard</a>
-        <a href="#" className="text-white">Artikel</a>
-        <a href="#" className="text-white">Gift Skin</a>
-        <a href="#" className="text-white">Kalkulator</a>
+        <Link to="/" className="text-yellow-400">Topup</Link>
+        <Link to="/invoice" className="text-white">Cek Transaksi</Link>
+        <span className="text-white/50 cursor-not-allowed">Leaderboard</span>
+        <span className="text-white/50 cursor-not-allowed">Artikel</span>
+        <span className="text-white/50 cursor-not-allowed">Gift Skin</span>
+        <span className="text-white/50 cursor-not-allowed">Kalkulator</span>
       </nav>
 
        <div className="bg-blue-700 text-white rounded-t-lg flex items-center">
@@ -173,7 +200,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
           </div>
 
           <div className="bg-slate-950 p-4 rounded-b-lg">
-            <div className="flex-row gap-7">
+            <div className="flex flex-col gap-4">
               <div>
                 <label className="block text-sm font-medium mb-2">Nama</label>
                 <input
@@ -221,7 +248,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
               <div className="bg-blue-700 rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
               <div className="ml-2 font-semibold">Pilih Nominal</div>
             </div>
-            <h2 className="text-blue-600 mb-1 mt-3">Diamonds</h2>
+            <h2 className="text-blue-600 mb-1 mt-3">{labels.currency}s</h2>
             <div className="grid grid-cols-2 gap-3">
               {products.map((product, index) => (
               <div
@@ -312,10 +339,10 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       </div>
     </div>
 
-    <img src="../image/logomlbb.webp" alt="Mobile Legends Logo" className="h-40 w-40 object-contain mx-auto" />
+    <img src={gameLogo} alt="Game Logo" className="h-40 w-40 object-contain mx-auto" />
 
     <div className="mt-6">
-      <h3 className="text-lg font-bold">Diamond Total</h3>
+      <h3 className="text-lg font-bold">{labels.currencyLabel}</h3>
       <p className="text-2xl font-semibold mt-2">{totalDiamond.toLocaleString()}</p>
     </div>
 
@@ -364,7 +391,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       <p><span className="font-semibold">ID Pengguna:</span> {userId}</p>
       <p><span className="font-semibold">Server:</span> {server}</p>
       <p><span className="font-semibold">No HP:</span> {nohp}</p>
-      <p><span className="font-semibold">Jumlah Diamond:</span> {totalDiamond}</p>
+      <p><span className="font-semibold">Jumlah {labels.unit}:</span> {totalDiamond}</p>
       <p><span className="font-semibold">Total Harga:</span> Rp {totalHarga.toLocaleString()}</p>
 
     </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from './Nav';
 
-const Header = () => (
+const Header = (props) => (
   <div>
-   <Navbar/>
+   <Navbar {...props} />
    </div>
 
 

@@ -18,8 +18,8 @@ const DiamondMl = () => {
           <img src="../image/logomlbb.webp" alt="Character Image" className="inline-block" />
           <div className="bg-yellow-500 p-4 rounded-lg mt-4">
             <h1 className="text-2xl font-bold">Beli Weekly Diamond Pass dan beli Skin Favorit kamu...</h1>
-            <p className="text-lg">BERSAMA HADI STORE</p>
-            <p className="text-4xl font-bold">this is Hadi Store</p>
+            <p className="text-lg">BERSAMA AKS Store</p>
+            <p className="text-4xl font-bold">this is AKS Store</p>
           </div>
         </div>
       </div>
