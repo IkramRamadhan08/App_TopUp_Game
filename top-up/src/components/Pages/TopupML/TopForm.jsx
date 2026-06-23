@@ -188,10 +188,6 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       <nav className="bg-gray-800 p-2 flex space-x-4">
         <Link to="/" className="text-yellow-400">Topup</Link>
         <Link to="/invoice" className="text-white">Cek Transaksi</Link>
-        <span className="text-white/50 cursor-not-allowed">Leaderboard</span>
-        <span className="text-white/50 cursor-not-allowed">Artikel</span>
-        <span className="text-white/50 cursor-not-allowed">Gift Skin</span>
-        <span className="text-white/50 cursor-not-allowed">Kalkulator</span>
       </nav>
 
        <div className="bg-blue-700 text-white rounded-t-lg flex items-center">
