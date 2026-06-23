@@ -2,6 +2,16 @@
 
 Platform top-up game dengan integrasi Midtrans Payment Gateway.
 
+## Screenshot
+
+| Beranda | Top Up | Pembayaran |
+|---------|--------|------------|
+| ![Beranda](Gambar/1.png) | ![Top Up](Gambar/2.png) | ![Bayar](Gambar/3.png) |
+
+| Konfirmasi | Riwayat | Midtrans Snap |
+|------------|---------|---------------|
+| ![Konfirmasi](Gambar/4.png) | ![Riwayat](Gambar/5.png) | ![Midtrans](Gambar/6.png) |
+
 ## Stack
 
 | Layer | Teknologi |
@@ -17,6 +27,7 @@ Platform top-up game dengan integrasi Midtrans Payment Gateway.
 ```
 api-topup/    → Backend API (Laravel)
 top-up/       → Frontend (React + Vite)
+Gambar/       → Screenshot aplikasi
 run.sh        → Menjalankan server
 ```
 
@@ -50,7 +61,7 @@ Akses: `http://localhost:5173`
 ## Admin
 
 - **Login**: `/login` (email: `admin@example.com`, password: `admin123`)
-- **Dashboard**: `/admin/dashboard`
+- **Dashboard**: `/dashboard`
 - Role `admin` diperlukan untuk akses dashboard
 
 ## Environment Variables
@@ -64,9 +75,10 @@ Akses: `http://localhost:5173`
 
 ## Fitur
 
-- Top-up Multi Game
+- Top-up Multi Game (ML, FF, HOK, PUBG)
 - Midtrans Payment Gateway (Snap)
 - Admin Dashboard (statistik, transaksi, user)
 - Google OAuth Login
 - Search game
 - FAQ interaktif
+- Status bayar otomatis dari Midtrans (tidak bisa dimanipulasi)
