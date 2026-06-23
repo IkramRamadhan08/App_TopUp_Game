@@ -23,8 +23,6 @@ const TransaksiPage = () => {
     jumlah: '',
     total_harga: '',
     payment_method: '',
-    status_pembayaran: 'UNPAID',
-    status_transaksi: 'PENDING',
   });
 
   // ✅ Fetch Data
@@ -68,8 +66,6 @@ const TransaksiPage = () => {
         jumlah: '',
         total_harga: '',
         payment_method: '',
-        status_pembayaran: 'UNPAID',
-        status_transaksi: 'PENDING',
       });
       setEditData(null);
       fetchTransaksi(); // ✅ Refresh setelah simpan
@@ -155,15 +151,12 @@ const getBadgeClass = (status, type) => {
           <input name="jumlah" value={form.jumlah} onChange={handleChange} placeholder="Jumlah" type="number" className="p-2 border rounded" />
           <input name="total_harga" value={form.total_harga} onChange={handleChange} placeholder="Total Harga" type="number" className="p-2 border rounded" />
           <input name="payment_method" value={form.payment_method} onChange={handleChange} placeholder="Metode Pembayaran" className="p-2 border rounded" />
-          <select name="status_pembayaran" value={form.status_pembayaran} onChange={handleChange} className="p-2 border rounded">
-            <option value="UNPAID">UNPAID</option>
-            <option value="PAID">PAID</option>
-          </select>
-          <select name="status_transaksi" value={form.status_transaksi} onChange={handleChange} className="p-2 border rounded">
-            <option value="PENDING">PENDING</option>
-            <option value="SUCCESS">SUCCESS</option>
-            <option value="FAILED">FAILED</option>
-          </select>
+          <div className="p-2 border rounded bg-gray-100 text-gray-600 text-sm flex items-center">
+            Status Bayar: <strong className="ml-1">{form.status_pembayaran}</strong>
+          </div>
+          <div className="p-2 border rounded bg-gray-100 text-gray-600 text-sm flex items-center">
+            Status: <strong className="ml-1">{form.status_transaksi}</strong>
+          </div>
         </div>
         <button type="submit" className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
           {editData ? 'Update' : 'Tambah'} Transaksi
@@ -178,7 +171,6 @@ const getBadgeClass = (status, type) => {
       setForm({
         nama: '', game_id: '', produk_type: '', server: '',
         jumlah: '', total_harga: '', payment_method: '',
-        status_pembayaran: 'UNPAID', status_transaksi: 'PENDING'
       });
     }}
     className="mt-2 ml-4 px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"

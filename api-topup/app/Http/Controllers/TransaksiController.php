@@ -44,8 +44,6 @@ class TransaksiController extends Controller
             'payment_method',
             'total_harga',
             'no_hp',
-            'status_pembayaran',
-            'status_transaksi',
         ]));
 
         return response()->json($transaksi);
