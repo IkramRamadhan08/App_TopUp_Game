@@ -1,70 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Table, Row, Col, CardBody, CardHeader, Card } from 'reactstrap'
 
-export default class Referensi extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      users: [],
-    }
-  }
+const Referensi = () => {
+  const [users, setUsers] = useState([])
 
-  componentDidMount() {
-    fetch('http://localhost:8000/api/users') // Ganti URL sesuai endpoint kamu
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ users: data })
-      })
-      .catch((error) => {
-        console.error('Gagal mengambil data:', error)
-      })
-  }
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/transaksi/users')
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.error('Gagal:', err))
+  }, [])
 
-  render() {
-    const { users } = this.state
-
-    return (
-      <div className="animated fadeIn">
-        <Row>
-          <Col>
-            <Card>
-              <CardHeader className="bg-primary text-white">
-                <strong>Data Pengguna</strong>
-              </CardHeader>
-              <CardBody>
-                <div className="table-responsive">
-                  <Table striped hover bordered responsive className="text-center">
-                    <thead className="table-dark">
-                      <tr>
-                        <th>#</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users.length > 0 ? (
-                        users.map((user, index) => (
-                          <tr key={user.id}>
-                            <td>{index + 1}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.status || 'Aktif'}</td>
-                          </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td colSpan="4">Tidak ada data</td>
+  return (
+    <div className="animated fadeIn">
+      <Row>
+        <Col>
+          <Card>
+            <CardHeader className="bg-primary text-white">
+              <strong>Data Customer</strong>
+            </CardHeader>
+            <CardBody>
+              <div className="table-responsive">
+                <Table striped hover bordered responsive className="text-center">
+                  <thead className="table-dark">
+                    <tr>
+                      <th>#</th>
+                      <th>Nama</th>
+                      <th>Game ID</th>
+                      <th>Server</th>
+                      <th>No HP</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.length > 0 ? (
+                      users.map((user, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{user.nama}</td>
+                          <td>{user.game_id}</td>
+                          <td>{user.server}</td>
+                          <td>{user.nohp || '-'}</td>
                         </tr>
-                      )}
-                    </tbody>
-                  </Table>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-    )
-  }
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="5">Tidak ada data</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+    </div>
+  )
 }
+
+export default Referensi
