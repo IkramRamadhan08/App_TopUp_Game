@@ -175,7 +175,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       <div className="bg-gradient-to-br from-blue-900 to-blue-600 text-white min-h-screen flex flex-col">
       <header className="bg-black p-4 flex items-center justify-between">
         <div className="flex items-center">
-          <img src="https://placehold.co/40x40" alt="Logo" className="mr-4" />
+          <img src={gameLogo} alt="Logo" className="mr-4 h-10 w-10 object-contain" />
           <input
             type="text"
             placeholder="Cari Game atau Voucher"

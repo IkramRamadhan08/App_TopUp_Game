@@ -27,7 +27,7 @@ const DiamondMl = () => {
   
     <section className="bg-gray-900 text-white p-8">
       <div className="flex items-center">
-        <img src="https://placehold.co/100x100" alt="Mobile Legends Logo" className="h-24 w-24" />
+        <img src="../image/logomlbb.webp" alt="Mobile Legends Logo" className="h-24 w-24 object-contain" />
         <div className="ml-4">
           <h2 className="text-2xl font-bold">MOBILE LEGENDS</h2>
           <p>Moonton</p>
