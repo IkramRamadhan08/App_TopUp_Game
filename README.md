@@ -4,13 +4,13 @@ Platform top-up game dengan integrasi Midtrans Payment Gateway.
 
 ## Screenshot
 
-| Beranda | Top Up | Pembayaran |
-|---------|--------|------------|
-| ![Beranda](Gambar/1.png) | ![Top Up](Gambar/2.png) | ![Bayar](Gambar/3.png) |
+| Beranda | Mobile Legends | Free Fire |
+|---------|----------------|-----------|
+| ![Beranda](Gambar/1.png) | ![ML](Gambar/2.png) | ![FF](Gambar/3.png) |
 
-| Konfirmasi | Riwayat | Midtrans Snap |
-|------------|---------|---------------|
-| ![Konfirmasi](Gambar/4.png) | ![Riwayat](Gambar/5.png) | ![Midtrans](Gambar/6.png) |
+| Honor of Kings | Dashboard Admin | Login |
+|----------------|-----------------|-------|
+| ![HOK](Gambar/4.png) | ![Dashboard](Gambar/5.png) | ![Login](Gambar/6.png) |
 
 ## Stack
 
