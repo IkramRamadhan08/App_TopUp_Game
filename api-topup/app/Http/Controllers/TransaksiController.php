@@ -63,16 +63,20 @@ class TransaksiController extends Controller
 {
     $transaksi = Transaksi::where('invoice_number', $invoiceNumber)->firstOrFail();
 
-    $status = (object) \Midtrans\Transaction::status($invoiceNumber);
+    try {
+        $status = (object) \Midtrans\Transaction::status($invoiceNumber);
 
-    $transaksi->payment_method = $status->payment_type ?? $transaksi->payment_method;
-    $transaksi->status_pembayaran = $status->transaction_status === 'settlement' ? 'PAID' : strtoupper($status->transaction_status);
-    $transaksi->status_transaksi = match ($status->transaction_status) {
-        'settlement' => 'SUCCESS',
-        'cancel', 'expire', 'deny' => 'FAILED',
-        default => 'PENDING',
-    };
-    $transaksi->midtrans_response = json_encode($status);
+        $transaksi->payment_method = $status->payment_type ?? $transaksi->payment_method;
+        $transaksi->status_pembayaran = $status->transaction_status === 'settlement' ? 'PAID' : strtoupper($status->transaction_status);
+        $transaksi->status_transaksi = match ($status->transaction_status) {
+            'settlement' => 'SUCCESS',
+            'cancel', 'expire', 'deny' => 'FAILED',
+            default => 'PENDING',
+        };
+        $transaksi->midtrans_response = json_encode($status);
+    } catch (\Exception $e) {
+        // Midtrans error — return data lokal saja
+    }
     $transaksi->save();
 
     return response()->json([
