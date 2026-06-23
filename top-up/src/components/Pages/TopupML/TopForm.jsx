@@ -120,13 +120,17 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       return;
     }
 
+    const isNumericProduct = selectedProduct && selectedProduct.category
+      ? ["diamond", "token", "uc"].includes(selectedProduct.category)
+      : Boolean(parseInt(products[selectedDiamond]?.name));
+
     const payload = {
       produk_id: selectedProductId,
       produk_type: selectedProduct.type,
       game_id: id,
       server: server,
       nama: nama,
-      jumlah: totalDiamond,
+      jumlah: isNumericProduct ? totalDiamond : 1,
       total_harga: totalHarga,
       payment_method: metodePembayaran,
       nohp: nohp
