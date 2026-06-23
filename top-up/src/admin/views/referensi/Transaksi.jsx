@@ -233,6 +233,7 @@ const getBadgeClass = (status, type) => {
         <th className="py-2 px-4 w-28">Metode</th>
         <th className="py-2 px-4 w-28">Status Bayar</th>
         <th className="py-2 px-4 w-28">Status</th>
+        <th className="py-2 px-4 w-36">Tanggal</th>
       </tr>
     </thead>
     <tbody>
@@ -265,8 +266,7 @@ const getBadgeClass = (status, type) => {
               {t.status_transaksi}
             </span>
           </td>
-          <td className="py-2 px-4 space-x-2">
-          </td>
+          <td className="py-2 px-4 text-xs whitespace-nowrap">{t.created_at ? new Date(t.created_at).toLocaleString('id-ID') : '-'}</td>
         </tr>
       ))}
     </tbody>

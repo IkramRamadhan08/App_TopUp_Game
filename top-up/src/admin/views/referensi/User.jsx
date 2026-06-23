@@ -70,6 +70,7 @@ const UserTable = () => {
             <th className="py-2 px-4 text-left">Game ID</th>
             <th className="py-2 px-4 text-left">Server</th>
             <th className="py-2 px-4 text-left">No HP</th>
+            <th className="py-2 px-4 text-left">Tanggal</th>
           </tr>
         </thead>
         <tbody>
@@ -129,7 +130,7 @@ const UserTable = () => {
                   <td className="py-2 px-4">{user.game_id}</td>
                   <td className="py-2 px-4">{user.server}</td>
                   <td className="py-2 px-4">{user.nohp || '-'}</td>
-                  
+                  <td className="py-2 px-4 text-xs whitespace-nowrap">{user.created_at ? new Date(user.created_at).toLocaleString('id-ID') : '-'}</td>
                 </>
               )}
             </tr>

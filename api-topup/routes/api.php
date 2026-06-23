@@ -51,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy']);
     Route::get('/total-pendapatan', [TransaksiController::class, 'totalPendapatan']);
     Route::get('/transaksi/users', function () {
-        return \App\Models\Transaksi::select('nama', 'game_id', 'server', 'nohp')->get();
+        return \App\Models\Transaksi::select('nama', 'game_id', 'server', 'nohp', 'created_at')->get();
     });
 });
 

@@ -420,30 +420,8 @@
 
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import {
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDescription,
-  cilDrop,
-  cilExternalLink,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-  cilUser,
-  cilTags,
-  cilTransfer,
-  cilHandPointUp,
-  cilDataTransferUp,
-  cilCreditCard,
-  cilMoney,
-  cilWallet
-  
-} from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import { cilSpeedometer, cilUser, cilTags, cilCreditCard } from '@coreui/icons'
+import { CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
   {
@@ -451,48 +429,29 @@ const _nav = [
     name: 'Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
   },
-
   {
-      component: CNavTitle,
-      name: 'Admin',
-    },
-    {
-      component: CNavItem,
-      name: 'Admin Tabel',
-      to: '/referensi/tabel',
-      icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'User',
-      to: '/referensi/User',
-      icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-      color: "info"
-    },
-    {
-      component: CNavItem,
-      name: 'Product',
-      to: '/referensi/Product',
-      icon: <CIcon icon={cilTags} customClassName="nav-icon" />,
-    },
+    component: CNavTitle,
+    name: 'Data',
+  },
   {
-      component: CNavItem,
-      name: 'Transaction',
-      to: '/referensi/Transaksi',
-      icon: <CIcon icon={cilCreditCard} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'Payment',
-      to: '/',
-      icon: <CIcon icon={cilWallet} customClassName="nav-icon" />,
-    },
-  
+    component: CNavItem,
+    name: 'User',
+    to: '/referensi/User',
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Product',
+    to: '/referensi/Product',
+    icon: <CIcon icon={cilTags} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Transaction',
+    to: '/referensi/Transaksi',
+    icon: <CIcon icon={cilCreditCard} customClassName="nav-icon" />,
+  },
 ]
 
 export default _nav
