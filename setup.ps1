@@ -44,53 +44,26 @@ if (-not (Test-Path ".env")) {
     Write-Host "[OK] .env sudah ada" -ForegroundColor Green
 }
 
+# Set default database (root, no password — default XAMPP)
+(Get-Content ".env") -replace 'DB_USERNAME=.*', "DB_USERNAME=root" | Set-Content ".env"
+(Get-Content ".env") -replace 'DB_PASSWORD=.*', "DB_PASSWORD=" | Set-Content ".env"
+
+# Hapus baris Midtrans dari .env.example biar dicopy ulang dengan key bawaan
+Write-Host "[OK] .env dikonfigurasi (DB: root, password kosong)" -ForegroundColor Green
+
 Write-Host "[3/5] Generate APP_KEY..." -ForegroundColor Gray
 php artisan key:generate --force
 Write-Host "[OK]" -ForegroundColor Green
 
-# --- Konfigurasi database ---
-Write-Host ""
-Write-Host ">>> Konfigurasi Database" -ForegroundColor Yellow
-$dbName = Read-Host "  Nama database (default: api_topup)"
-if (-not $dbName) { $dbName = "api_topup" }
-$dbUser = Read-Host "  User MySQL (default: root)"
-if (-not $dbUser) { $dbUser = "root" }
-$dbPass = Read-Host "  Password MySQL (kosongkan jika tanpa password)"
-
-# Update .env
-(Get-Content ".env") -replace 'DB_DATABASE=.*', "DB_DATABASE=$dbName" | Set-Content ".env"
-(Get-Content ".env") -replace 'DB_USERNAME=.*', "DB_USERNAME=$dbUser" | Set-Content ".env"
-(Get-Content ".env") -replace 'DB_PASSWORD=.*', "DB_PASSWORD=$dbPass" | Set-Content ".env"
-
-# Tambah Midtrans keys kalau belum ada
-$envContent = Get-Content ".env" -Raw
-if ($envContent -notmatch "MIDTRANS_SERVER_KEY") {
-    Write-Host ""
-    Write-Host ">>> Konfigurasi Midtrans" -ForegroundColor Yellow
-    Write-Host "  Masukkan key dari dashboard Midtrans (https://dashboard.midtrans.com)"
-    Write-Host "  Kosongkan untuk pakai placeholder (isi manual nanti)"
-    $midServer = Read-Host "  Server Key"
-    $midClient = Read-Host "  Client Key"
-    if (-not $midServer) { $midServer = "" }
-    if (-not $midClient) { $midClient = "" }
-    Add-Content ".env" @"
-
-# Midtrans
-MIDTRANS_SERVER_KEY=$midServer
-MIDTRANS_CLIENT_KEY=$midClient
-MIDTRANS_IS_PRODUCTION=false
-MIDTRANS_IS_SANITIZED=true
-MIDTRANS_IS_3DS=true
-"@
-}
-Write-Host "[OK] .env dikonfigurasi" -ForegroundColor Green
-
 Write-Host "[4/5] Migrate & seed database..." -ForegroundColor Gray
+
+# Coba buat database dulu (skip kalo udah ada)
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS api_topup;" 2>$null
+
 php artisan migrate --seed --force
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "[WARNING] Migrate gagal. Pastikan MySQL aktif dan database '$dbName' sudah dibuat." -ForegroundColor Yellow
-    Write-Host "  Buat database manual:"
-    Write-Host "    mysql -u $dbUser -p -e 'CREATE DATABASE $dbName;'"
+    Write-Host "[WARNING] Migrate gagal. Pastikan MySQL aktif." -ForegroundColor Yellow
+    Write-Host "  Buka XAMPP > start MySQL, lalu jalankan ulang script ini."
 } else {
     Write-Host "[OK]" -ForegroundColor Green
 }
@@ -106,7 +79,7 @@ Write-Host ""
 Write-Host ">>> Frontend (React + Vite)" -ForegroundColor Yellow
 Set-Location "top-up"
 
-Write-Host "[1/2] Install npm dependencies..." -ForegroundColor Gray
+Write-Host "[1/1] Install npm dependencies..." -ForegroundColor Gray
 npm install
 if ($LASTEXITCODE -ne 0) { Write-Host "[ERROR] npm install gagal" -ForegroundColor Red; exit 1 }
 Write-Host "[OK]" -ForegroundColor Green
