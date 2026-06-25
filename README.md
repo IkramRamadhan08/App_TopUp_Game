@@ -77,10 +77,7 @@ run.sh        → Jalankan server (Linux/macOS)
 
 ## Midtrans
 
-Key sandbox sudah include, langsung bisa testing. Testing pake kartu:
-```
-4811 1111 1111 1114  |  expiry masa depan  |  OTP: 112233
-```
+Buat akun di https://dashboard.midtrans.com/, ambil **Server Key** & **Client Key** dari menu Settings > Access Keys, lalu isi di `api-topup/.env`.
 
 ## Environment Variables (`api-topup/.env`)
 
