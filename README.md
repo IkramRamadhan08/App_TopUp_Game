@@ -14,6 +14,10 @@ Platform top-up game (Mobile Legends, Free Fire, Honor of Kings, PUBG) dengan in
 |----------------|-------|-----------------|
 | ![HOK](Gambar/4.png) | ![Login](Gambar/5.png) | ![Dashboard](Gambar/6.png) |
 
+| Dashboard (Admin) | User (Admin) | Product (Admin) | Transaction (Admin) |
+|-------------------|-------------|-----------------|--------------------|
+| ![Dashboard](Gambar/11.png) | ![User](Gambar/12.png) | ![Product](Gambar/13.png) | ![Transaction](Gambar/14.png) |
+
 ---
 
 ## 📋 Daftar Isi
