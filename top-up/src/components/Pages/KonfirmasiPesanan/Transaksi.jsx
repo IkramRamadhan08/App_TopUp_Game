@@ -8,7 +8,7 @@ export const useTransaksi = () => {
   const submitTransaksi = async (data) => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/api/transaksi", data);
+      const response = await axios.post("/api/transaksi", data);
       setInvoice(response.data.invoice);
       return response.data.invoice;
     } finally {

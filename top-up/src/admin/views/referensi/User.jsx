@@ -9,7 +9,7 @@ const UserTable = () => {
   const [formData, setFormData] = useState({ nama: '', game_id: '', server: '', no_hp: '' });
 
   const fetchUsers = async () => {
-    const res = await axios.get('http://localhost:8000/api/transaksi/users');
+    const res = await axios.get('/api/transaksi/users');
     setUsers(res.data);
   };
 

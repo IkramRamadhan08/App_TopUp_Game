@@ -15,7 +15,7 @@ const Invoice = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.get(`http://localhost:8000/api/cek-status/${invoiceNumber}`);
+      const res = await axios.get(`/api/cek-status/${invoiceNumber}`);
       setData(res.data.data);
     } catch {
       setError('Invoice tidak ditemukan');

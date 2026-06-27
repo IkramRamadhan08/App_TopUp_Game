@@ -6,7 +6,7 @@ const ProductTable = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/products')
+    axios.get('/api/products')
       .then((res) => {
         setProduk(res.data);
         setIsLoading(false);

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
-   content: [
+  content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
@@ -14,12 +14,17 @@ export default defineConfig({
   plugins: [
     react(),
     svgr(),
-    
-     // Tambahkan ini
   ],
-   esbuild: {
+  esbuild: {
     loader: 'jsx',
-    include: /src\/.*\.jsx?$/, // pastikan .jsx dikenali
+    include: /src\/.*\.jsx?$/,
   },
-  
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+    },
+  },
 })

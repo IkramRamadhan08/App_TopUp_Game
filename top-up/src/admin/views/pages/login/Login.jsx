@@ -28,7 +28,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8000/api/login", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -48,7 +48,7 @@ const Login = () => {
   const handleGoogleCallback = async (response) => {
     const credential = response.credential;
     try {
-      const res = await fetch("http://localhost:8000/api/admin/google-login", {
+      const res = await fetch("/api/admin/google-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ credential }),
