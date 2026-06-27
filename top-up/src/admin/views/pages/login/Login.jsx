@@ -69,7 +69,7 @@ const Login = () => {
     if (typeof google !== "undefined") {
       /* global google */
       google.accounts.id.initialize({
-        client_id: "279072542678-oqhnq4faca0d2d4tc4e25sq21sj9b9ih.apps.googleusercontent.com",
+        client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
         callback: handleGoogleCallback,
       });
       google.accounts.id.renderButton(

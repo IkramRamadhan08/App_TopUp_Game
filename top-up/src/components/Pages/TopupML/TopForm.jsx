@@ -45,7 +45,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
   const [PerDiamond, setPerDiamond] = useState(0);
   const [totalDiamond, setTotalDiamond] = useState(PerDiamond);
   const [products, setProducts] = useState([]);
-  const [metodePembayaran, setMetodePembayaran] = useState("");
+  const [setuju, setSetuju] = useState(false);
 
   const [id, setId] = useState("");
   const [nama, setNama] = useState("");
@@ -115,8 +115,8 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       return;
     }
 
-    if (!metodePembayaran) {
-      alert("Harap pilih metode pembayaran");
+    if (!setuju) {
+      alert("Harap centang persetujuan Ketentuan Layanan terlebih dahulu");
       return;
     }
 
@@ -132,7 +132,6 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
       nama: nama,
       jumlah: isNumericProduct ? totalDiamond : 1,
       total_harga: totalHarga,
-      payment_method: metodePembayaran,
       nohp: nohp
     };
 
@@ -396,30 +395,22 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
 
     </div>
 
-    {/* Pilih Metode */}
-    <div className="mt-4 text-sm">
-      <label className="block mb-1 font-medium">Metode Pembayaran</label>
-      <select
-        className="bg-gray-700 text-white w-full px-3 py-2 rounded border border-gray-600"
-        value={metodePembayaran}
-        onChange={(e) => setMetodePembayaran(e.target.value)}
-      >
-        <option value="">-- Pilih --</option>
-        <option value="dana">DANA</option>
-        <option value="gopay">GoPay</option>
-        <option value="OVO">OVO</option>
-        <option value="BCA">BCA</option>
-      </select>
-    </div>
-
     {/* Checkbox */}
     <div className="flex items-start mt-3 text-xs text-gray-300">
-      <input type="checkbox" className="mr-2 mt-1 accent-blue-500" />
+      <input
+        type="checkbox"
+        className="mr-2 mt-1 accent-blue-500"
+        checked={setuju}
+        onChange={(e) => setSetuju(e.target.checked)}
+      />
       <label>
         Dengan klik <span className="text-white font-medium">Pesan Sekarang</span>, kamu menyetujui{' '}
         <span className="text-blue-400 underline">Ketentuan Layanan</span>.
       </label>
     </div>
+    {!setuju && (
+      <p className="text-red-400 text-xs mt-1">Harap centang persetujuan terlebih dahulu</p>
+    )}
 
     {/* Tombol Aksi */}
     <div className="flex justify-end gap-3 mt-5">

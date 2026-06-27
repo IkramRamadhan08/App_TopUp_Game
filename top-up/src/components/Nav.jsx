@@ -7,7 +7,7 @@ const Navbar = ({ search = "", onSearch }) => {
   return (
     <nav className="bg-blue-900 text-white p-4 flex items-center justify-between fixed top-0 w-full z-50 shadow-lg opacity-95">
       <Link to="/" className="flex items-center">
-        <img src="https://placehold.co/40x40" alt="AKS Store Logo" className="h-10 w-10" />
+        <img src="/image/AKS.jpeg" alt="AKS Store Logo" className="h-14 w-auto" />
       </Link>
       <input
         type="text"
@@ -17,10 +17,19 @@ const Navbar = ({ search = "", onSearch }) => {
         className="ml-4 h-9 max-w-md w-full p-2 rounded-lg border bg-gray-800 text-white"
       />
       <div className="flex items-center space-x-4">
-        <Link to="/" className="hover:underline">Topup</Link>
+        <button
+          onClick={() => {
+            if (window.location.pathname === '/') {
+              document.getElementById('games')?.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              navigate('/');
+            }
+          }}
+          className="hover:underline"
+        >Topup</button>
         <Link to="/invoice" className="hover:underline">Cek Transaksi</Link>
         <div className="flex items-center space-x-2">
-          <img src="https://placehold.co/20x20" alt="Indonesia Flag" className="h-5 w-5" />
+          <img src="https://flagcdn.com/id.svg" alt="Indonesia Flag" className="h-6 w-6" />
           <span>ID</span>
         </div>
         <Link to="/login" className="hover:underline">Masuk</Link>

@@ -104,7 +104,7 @@ class TransaksiController extends Controller
             'server' => 'required|string',
             'jumlah' => 'required|integer|min:1',
             'total_harga' => 'required|integer|min:0',
-            'payment_method' => 'required|string',
+            'payment_method' => 'nullable|string',
             'nohp' => 'required|string'
         ]);
 
@@ -118,7 +118,7 @@ class TransaksiController extends Controller
             'game_id' => $request->game_id,
             'server' => $request->input('server'),
             'jumlah' => $request->jumlah,
-            'payment_method' => $request->payment_method,
+            'payment_method' => $request->payment_method ?? 'Midtrans',
             'total_harga' => $request->total_harga,
             'nohp' => $request->nohp,
             'invoice_number' => $invoiceNumber,

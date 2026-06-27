@@ -7,7 +7,7 @@ const faqs = [
   },
   {
     q: "Metode pembayaran apa saja yang ada di AKS Store?",
-    a: "Kami menerima DANA, GoPay, OVO, dan transfer BCA.",
+    a: "Kami menerima berbagai metode pembayaran melalui Midtrans (DANA, GoPay, OVO, transfer bank, QRIS, dan lainnya).",
   },
 ];
 

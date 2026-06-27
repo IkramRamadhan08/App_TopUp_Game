@@ -4,6 +4,9 @@ Platform top-up game (Free Fire, Mobile Legends, Honor of Kings, PUBG) dengan in
 
 ## Cara Pakai
 
+> **⚠️ PENTING:** Jangan double-click file `.sh` — itu script Linux, bakal kebuka Notepad doang.  
+> Gunakan **PowerShell** (klik kanan > Run with PowerShell) untuk file `.ps1`.
+
 ### Windows
 ```powershell
 git clone https://github.com/IkramRamadhan08/App_TopUp_Game.git
@@ -75,11 +78,38 @@ run.sh        → Jalankan server (Linux/macOS)
 - **Honor of Kings** — Token
 - **PUBG Mobile** — UC & Royal Pass
 
+## Google OAuth
+
+Project ini pakai Google Login untuk admin. Google Client ID masih **hardcoded** sekarang, tapi rencananya bakal dipindah ke `.env`.
+
+### Cara Setup Google OAuth (buat project sendiri)
+
+1. Buka [Google Cloud Console](https://console.cloud.google.com/)
+2. Buat project baru atau pilih project yang udah ada
+3. Ke **APIs & Services** > **Credentials**
+4. Klik **Create Credentials** > **OAuth client ID**
+5. Pilih **Web application**
+6. Di **Authorized JavaScript origins** tambahin:
+   - `http://localhost:5173`
+7. Di **Authorized redirect URIs** tambahin:
+   - `http://localhost:5173`
+8. Klik **Create**, bakal dapet **Client ID**
+9. Ganti Client ID di:
+   - `api-topup/app/Http/Controllers/UserController.php` (line 64)
+   - `top-up/src/admin/views/pages/login/Login.jsx` (line 72)
+
+### Cara Kerja Google Login
+- Frontend pake [Google Identity Services (GIS)](https://accounts.google.com/gsi/client)
+- Token ID dikirim ke backend via `POST /api/admin/google-login`
+- Backend verify pake `google/apiclient`, kalau valid bikin/session user + kasih token Sanctum
+
 ## Midtrans
 
 Buat akun di https://dashboard.midtrans.com/, ambil **Server Key** & **Client Key** dari menu Settings > Access Keys, lalu isi di `api-topup/.env`.
 
-## Environment Variables (`api-topup/.env`)
+## Environment Variables
+
+### `api-topup/.env` (Backend)
 
 | Variable | Fungsi | Default |
 |----------|--------|---------|
@@ -88,3 +118,10 @@ Buat akun di https://dashboard.midtrans.com/, ambil **Server Key** & **Client Ke
 | `DB_PASSWORD` | Password MySQL | *(kosong)* |
 | `MIDTRANS_SERVER_KEY` | Server key Midtrans | *(sandbox)* |
 | `MIDTRANS_CLIENT_KEY` | Client key Midtrans | *(sandbox)* |
+| `GOOGLE_CLIENT_ID` | Client ID Google OAuth | *(hardcoded sementara)* |
+
+### `top-up/.env` (Frontend)
+
+| Variable | Fungsi | Default |
+|----------|--------|---------|
+| `VITE_GOOGLE_CLIENT_ID` | Client ID Google OAuth | *(sama dengan backend)* |

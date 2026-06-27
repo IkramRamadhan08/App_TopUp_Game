@@ -61,7 +61,7 @@ class UserController extends Controller
 
 function googleLogin(Request $request)
 {
-    $client = new \Google_Client(['client_id' => '279072542678-oqhnq4faca0d2d4tc4e25sq21sj9b9ih.apps.googleusercontent.com']);
+    $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
     $payload = $client->verifyIdToken($request->credential);
 
     if ($payload) {
