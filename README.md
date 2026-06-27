@@ -37,7 +37,47 @@ Buka **http://localhost:5173**
 - **Node.js** 18+ — https://nodejs.org/
 - **MySQL** (atau XAMPP) — https://dev.mysql.com/downloads/
 
-> **XAMPP user**: cukup start MySQL aja dari XAMPP Control Panel, gak perlu setting apapun.
+> **XAMPP user**: cukup start MySQL aja dari XAMPP Control Panel.
+
+## Troubleshooting Database (DB Kosong)
+
+Kalo abis jalanin `setup.ps1` tapi database kosong (gak ada tabel), berarti MySQL gagal connect. Ikutin ini:
+
+### 1. Pastikan MySQL sudah jalan
+- **XAMPP**: buka XAMPP Control Panel → klik **Start** pada MySQL
+- **MySQL standalone**: buka Services (`services.msc`) → cari **MySQL** → pastikan statusnya **Running**
+
+### 2. Cek file `api-topup/.env`
+Buka file **`api-topup/.env`** di Notepad/VS Code, pastikan baris ini sesuai:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=api_topup
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+> **Catatan**: default XAMPP pake `root` tanpa password. Kalo MySQL kamu pake password, isi di `DB_PASSWORD`.
+
+### 3. Jalanin migration manual
+Buka **PowerShell** di folder `api-topup/` lalu jalanin:
+
+```powershell
+php artisan migrate --seed --force
+```
+
+Kalo sukses, bakal muncul daftar tabel: `products`, `users`, `transaksi`, dll.
+
+### 4. Reset database dari awal (opsional)
+```powershell
+php artisan migrate:fresh --seed --force
+```
+Ini bakal hapus semua tabel, bikin ulang, dan isi data contoh.
+
+### 5. Setelah migration sukses
+Jalanin ulang `.\run.ps1` dari root folder, buka `http://localhost:5173`.
 
 ## Stack
 
@@ -80,7 +120,7 @@ run.sh        → Jalankan server (Linux/macOS)
 
 ## Google OAuth
 
-Project ini pakai Google Login untuk admin. Google Client ID masih **hardcoded** sekarang, tapi rencananya bakal dipindah ke `.env`.
+Project ini udah pake Google Login, Client ID disimpan di file `.env`.
 
 ### Cara Setup Google OAuth (buat project sendiri)
 
@@ -94,9 +134,9 @@ Project ini pakai Google Login untuk admin. Google Client ID masih **hardcoded**
 7. Di **Authorized redirect URIs** tambahin:
    - `http://localhost:5173`
 8. Klik **Create**, bakal dapet **Client ID**
-9. Ganti Client ID di:
-   - `api-topup/app/Http/Controllers/UserController.php` (line 64)
-   - `top-up/src/admin/views/pages/login/Login.jsx` (line 72)
+9. Ganti Client ID di 2 file:
+   - **`api-topup/.env`** → `GOOGLE_CLIENT_ID=isi_disini`
+   - **`top-up/.env`** → `VITE_GOOGLE_CLIENT_ID=isi_disini`
 
 ### Cara Kerja Google Login
 - Frontend pake [Google Identity Services (GIS)](https://accounts.google.com/gsi/client)
@@ -118,7 +158,7 @@ Buat akun di https://dashboard.midtrans.com/, ambil **Server Key** & **Client Ke
 | `DB_PASSWORD` | Password MySQL | *(kosong)* |
 | `MIDTRANS_SERVER_KEY` | Server key Midtrans | *(sandbox)* |
 | `MIDTRANS_CLIENT_KEY` | Client key Midtrans | *(sandbox)* |
-| `GOOGLE_CLIENT_ID` | Client ID Google OAuth | *(hardcoded sementara)* |
+| `GOOGLE_CLIENT_ID` | Client ID Google OAuth | *(isi dari Google Console)* |
 
 ### `top-up/.env` (Frontend)
 
