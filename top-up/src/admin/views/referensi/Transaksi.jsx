@@ -29,7 +29,7 @@ const TransaksiPage = () => {
   const fetchTransaksi = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get('/api/transaksi');
+      const res = await axios.get('http://localhost:8000/api/transaksi');
       setTransaksi(res.data);
     } catch (error) {
       console.error('Gagal memuat data transaksi', error);
@@ -53,9 +53,9 @@ const TransaksiPage = () => {
     e.preventDefault();
     try {
       if (editData) {
-        await axios.put(`/api/transaksi/${editData.id}`, form);
+        await axios.put(`http://localhost:8000/api/transaksi/${editData.id}`, form);
       } else {
-        await axios.post('/api/transaksi', form);
+        await axios.post('http://localhost:8000/api/transaksi', form);
       }
 
       setForm({
@@ -84,7 +84,7 @@ const TransaksiPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Yakin ingin menghapus transaksi ini?')) return;
     try {
-      await axios.delete(`/api/transaksi/${id}`);
+      await axios.delete(`http://localhost:8000/api/transaksi/${id}`);
       alert('Transaksi berhasil dihapus.');
       fetchTransaksi(); // ✅ Auto-refresh
     } catch (error) {

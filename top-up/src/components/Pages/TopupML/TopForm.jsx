@@ -84,7 +84,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get(`/api/products?type=${gameType}`);
+        const response = await axios.get(`http://localhost:8000/api/products?type=${gameType}`);
         setProducts(response.data);
       } catch (error) {
         console.error("Error:", error);
@@ -138,7 +138,7 @@ const TopupForm = ({ gameType = "mobilelegend", gameLogo = "../image/logomlbb.we
     console.log("Payload yang dikirim:", payload);
 
     try {
-      const res = await axios.post("/api/transaksi", payload);
+      const res = await axios.post("http://localhost:8000/api/transaksi", payload);
       const { snap_token, invoice } = res.data.data;
 
       setShowModal(false);

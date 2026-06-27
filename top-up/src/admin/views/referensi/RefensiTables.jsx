@@ -6,7 +6,7 @@ const Referensi = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    axios.get('/api/transaksi/users')
+    axios.get('http://localhost:8000/api/transaksi/users')
       .then((res) => setUsers(res.data))
       .catch((err) => console.error('Gagal:', err))
   }, [])

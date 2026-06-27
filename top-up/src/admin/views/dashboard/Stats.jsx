@@ -17,7 +17,7 @@ const Stats = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('/api/stats')
+        const res = await axios.get('http://localhost:8000/api/stats')
         setData(res.data)
       } catch (err) {
         console.error('Gagal memuat data dashboard:', err)

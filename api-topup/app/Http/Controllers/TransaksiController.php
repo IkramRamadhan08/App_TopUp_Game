@@ -137,7 +137,7 @@ class TransaksiController extends Controller
                 'phone' => $request->nohp,
             ],
             'callbacks' => [
-                'finish' => env('APP_URL') . '/invoice?order_id=' . $invoiceNumber,
+                'finish' => 'http://localhost:5173/invoice?order_id=' . $invoiceNumber,
             ]
         ];
 
